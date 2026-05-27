@@ -1,5 +1,6 @@
 package com.example.shopping_cart.controller;
 
+import com.example.shopping_cart.dto.AddToCartRequestDto;
 import com.example.shopping_cart.dto.CartDto;
 import com.example.shopping_cart.dto.CreateCartCommand;
 import com.example.shopping_cart.service.CartService;
@@ -17,4 +18,8 @@ public class CartController {
         return cartService.create(command.userId());
     }
 
+    @PostMapping("/item")
+    public CartDto addItemToCart(@RequestBody AddToCartRequestDto request) {
+        return cartService.addItemToCart(request);
+    }
 }
