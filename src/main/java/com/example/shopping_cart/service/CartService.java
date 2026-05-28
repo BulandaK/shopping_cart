@@ -4,7 +4,6 @@ import com.example.shopping_cart.dto.AddToCartRequestDto;
 import com.example.shopping_cart.dto.CartDto;
 import com.example.shopping_cart.mapper.CartMapper;
 import com.example.shopping_cart.model.Cart;
-import com.example.shopping_cart.model.CartItem;
 import com.example.shopping_cart.repository.CartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -47,4 +46,8 @@ public class CartService {
         return newCart;
     }
 
+    public CartDto getCart(Long userId) {
+        Cart cart = cartRepository.getCartByUserId(userId).orElseThrow();
+        return cartMapper.toDto(cart);
+    }
 }

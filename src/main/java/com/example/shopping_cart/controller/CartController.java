@@ -22,4 +22,9 @@ public class CartController {
     public CartDto addItemToCart(@RequestBody AddToCartRequestDto request) {
         return cartService.addItemToCart(request);
     }
+
+    @GetMapping("/user/{userId")
+    public CartDto get(@PathVariable Long userId) {
+        return cartService.getCart(userId);
+    }
 }
