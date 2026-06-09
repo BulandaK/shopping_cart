@@ -52,4 +52,10 @@ public class CartService {
         return newCart;
     }
 
+    @Transactional
+    public void delete(Long id) {
+        Cart cart =cartRepository.findById(id)
+                .orElseThrow(() -> new CartNotFoundException("Cart with id: " + id + " not found"));
+        cartRepository.delete(cart);
+    }
 }
