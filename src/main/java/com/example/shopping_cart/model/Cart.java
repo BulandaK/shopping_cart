@@ -1,5 +1,6 @@
 package com.example.shopping_cart.model;
 
+import com.example.shopping_cart.exception.QuantityIsNotPositiveException;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +26,7 @@ public class Cart {
 
     public void addProduct(Long productId, Integer quantity) {
         if (quantity <= 0) {
-            throw new IllegalArgumentException("Ilość musi być większa od zera!");
+            throw new QuantityIsNotPositiveException("Quantity have to be positive");
         }
 
         Optional<CartItem> existingItem = this.items.stream()
