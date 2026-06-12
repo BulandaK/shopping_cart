@@ -6,6 +6,7 @@ import com.example.shopping_cart.exception.CartAlreadyExistsException;
 import com.example.shopping_cart.exception.CartNotFoundException;
 import com.example.shopping_cart.mapper.CartMapper;
 import com.example.shopping_cart.model.Cart;
+import com.example.shopping_cart.producer.CartEventProducer;
 import com.example.shopping_cart.repository.CartRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,12 +30,14 @@ public class CartServiceTest {
     CartRepository cartRepository;
     CartMapper cartMapper;
     CartService cartService;
+    CartEventProducer cartEventProducer;
 
     @BeforeEach
     void setup() {
         this.cartMapper = Mappers.getMapper(CartMapper.class);
         this.cartRepository = Mockito.mock(CartRepository.class);
-        this.cartService = new CartService(cartRepository,cartMapper);
+        this.cartEventProducer = Mockito.mock(CartEventProducer.class);
+        this.cartService = new CartService(cartRepository,cartMapper,cartEventProducer);
     }
     @Nested
     class CreateCartTest {
