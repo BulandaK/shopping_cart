@@ -25,7 +25,7 @@ public class CartService {
         if (cartRepository.existsByUserId(userId)) {
             throw new CartAlreadyExistsException("Cart already exists for this user");
         }
-        Cart cart = new Cart(null, userId, LocalDateTime.now(), null);
+        Cart cart = new Cart(null, userId, LocalDateTime.now(), new ArrayList<>());
         Cart saved = cartRepository.save(cart);
         return cartMapper.toDto(saved);
     }
@@ -49,6 +49,7 @@ public class CartService {
         Cart newCart = new Cart();
         newCart.setUserId(userId);
         newCart.setItems(new ArrayList<>());
+        newCart.setCreatedAt(LocalDateTime.now());
         return newCart;
     }
 
